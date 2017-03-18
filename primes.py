@@ -35,8 +35,8 @@ def get_large_prime(i=100, j=300):
 	return find_primes_in_range(i, j)[-1]
 
 if __name__ == "__main__":
-	i = int(sys.argv[1])
-	j = int(sys.argv[2])
+	i = int(sys.argv[1]) if len(sys.argv) >= 3 else 100
+	j = int(sys.argv[2]) if len(sys.argv) >= 3 else 300
 	result = get_large_prime(i, j)
 	print(result)
 
