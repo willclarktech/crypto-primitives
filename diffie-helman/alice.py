@@ -1,8 +1,10 @@
-from primes import get_large_prime
+import os, sys
+sys.path.append(os.path.abspath(os.path.join('primes')))
+import primes
 from random import randint
 
 g = 2
-p = get_large_prime()
+p = primes.get_large_prime()
 print("g: ", g)
 print("p: ", p)
 
