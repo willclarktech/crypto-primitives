@@ -22,9 +22,8 @@ def get_next_prime(primes):
 	return n
 
 def find_primes(primes, n):
-	while n > 0:
+	while primes[-1] < n:
 		primes.append(get_next_prime(primes))
-		n -= 1
 	return primes
 
 def find_primes_in_range(i, j):
