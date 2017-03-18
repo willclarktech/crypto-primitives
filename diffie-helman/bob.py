@@ -1,6 +1,7 @@
 from random import randint
 
-g, p = [int(input("Enter g now: ")), int(input("Enter p now: "))]
+g = int(input("Enter g now: "))
+p = int(input("Enter p now: "))
 
 b = randint(2000, 3000)
 B = g**b % p
