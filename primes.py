@@ -19,13 +19,10 @@ def get_next_prime(primes):
 	return n
 
 def find_primes(primes, n):
-	if n == 0:
-		return primes
-	else:
-		next_prime = get_next_prime(primes)
-		new_primes = primes[:] + [next_prime]
-		print(new_primes[-1])
-		return find_primes(new_primes, n-1)
+	while n > 0:
+		primes.append(get_next_prime(primes))
+		n -= 1
+	return primes
 
 def find_primes_in_range(i, j):
 	n = randint(i, j)
