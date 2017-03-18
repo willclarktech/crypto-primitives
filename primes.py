@@ -1,3 +1,4 @@
+import sys
 from random import randint
 
 def check_prime(n, primes):
@@ -22,16 +23,20 @@ def find_primes(primes, n):
 		return primes
 	else:
 		next_prime = get_next_prime(primes)
-		primes.append(next_prime)
-		return find_primes(primes, n-1)
+		new_primes = primes[:] + [next_prime]
+		print(new_primes[-1])
+		return find_primes(new_primes, n-1)
 
-def find_primes_in_range(i=100, j=300):
+def find_primes_in_range(i, j):
 	n = randint(i, j)
 	return find_primes([2], n)
 
-def get_large_prime():
-	return find_primes_in_range()[-1]
+def get_large_prime(i=100, j=300):
+	return find_primes_in_range(i, j)[-1]
 
 if __name__ == "__main__":
-	print(get_large_prime())
+	i = int(sys.argv[1])
+	j = int(sys.argv[2])
+	result = get_large_prime(i, j)
+	print(result)
 
