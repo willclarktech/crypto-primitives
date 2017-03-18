@@ -3,13 +3,12 @@ from math import sqrt
 from random import randint
 
 def check_prime(n, primes):
-	is_prime = True
 	for prime in primes:
 		if sqrt(n) < prime:
 			break
 		elif n % prime == 0:
-			is_prime = False
-	return is_prime
+			return False
+	return True
 
 def get_next_prime(primes):
 	n = primes[-1] + 2
@@ -18,7 +17,7 @@ def get_next_prime(primes):
 		if check_prime(n, primes):
 			found = True
 		else:
-			n+=1
+			n+=2
 	return n
 
 def find_primes_in_range(i, j):
