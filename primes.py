@@ -21,15 +21,12 @@ def get_next_prime(primes):
 			n+=1
 	return n
 
-def find_primes(primes, n):
+def find_primes_in_range(i, j):
+	n = randint(i, j)
+	primes = [2, 3]
 	while primes[-1] < n:
 		primes.append(get_next_prime(primes))
 	return primes
-
-def find_primes_in_range(i, j):
-	n = randint(i, j)
-	initial_primes = [2, 3]
-	return find_primes(initial_primes, n)
 
 def get_large_prime(i=100, j=300):
 	return find_primes_in_range(i, j)[-1]
