@@ -12,7 +12,7 @@ def check_prime(n, primes):
 	return isPrime
 
 def get_next_prime(primes):
-	n = primes[-1] + 1
+	n = primes[-1] + 2
 	found = False
 	while found == False:
 		if check_prime(n, primes):
@@ -28,7 +28,8 @@ def find_primes(primes, n):
 
 def find_primes_in_range(i, j):
 	n = randint(i, j)
-	return find_primes([2], n)
+	initial_primes = [2, 3]
+	return find_primes(initial_primes, n)
 
 def get_large_prime(i=100, j=300):
 	return find_primes_in_range(i, j)[-1]
