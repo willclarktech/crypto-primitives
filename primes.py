@@ -25,11 +25,13 @@ def find_primes(primes, n):
 		primes.append(next_prime)
 		return find_primes(primes, n-1)
 
-def get_large_prime():
-	n = randint(100, 300)
+def find_primes_in_range(i=100, j=300):
+	n = randint(i, j)
 	return find_primes([2], n)
 
+def get_large_prime():
+	return find_primes_in_range()[-1]
+
 if __name__ == "__main__":
-	result = get_large_prime() 
-	print(result[-1])
+	print(get_large_prime())
 
