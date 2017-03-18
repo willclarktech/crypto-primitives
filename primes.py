@@ -1,10 +1,13 @@
 import sys
+from math import sqrt
 from random import randint
 
 def check_prime(n, primes):
 	isPrime = True
 	for prime in primes:
-		if n % prime == 0:
+		if sqrt(n) < prime:
+			break
+		elif n % prime == 0:
 			isPrime = False
 	return isPrime
 
