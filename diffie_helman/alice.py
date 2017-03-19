@@ -3,7 +3,7 @@ import os, sys
 sys.path.append(os.path.abspath(os.path.join('primes')))
 sys.path.append(os.path.abspath(os.path.join('redis_tools')))
 from primes import get_large_prime
-from redis_tools import setter, getter
+from redis_tools import setter, waiter
 from random import randint
 
 def main(min_a=2000, max_a=3000, g=2):
@@ -19,8 +19,10 @@ def main(min_a=2000, max_a=3000, g=2):
 	redis_setter.send(['A', A])
 	print("A: ", A)
 
-	redis_getter = getter('B')
-	B = int(redis_getter.send(None))
+	print("Waiting for B...")
+	redis_waiter = waiter('B')
+	B = int(redis_waiter.send(None))
+	print("B: ", B)
 	s = B**a % p
 	print("RESULT: ", s)
 
