@@ -1,4 +1,4 @@
 __pycache__/
 dump.rdb
 *.swp
-primes.pyc
+*.pyc
