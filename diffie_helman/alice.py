@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 import os, sys
 sys.path.append(os.path.abspath(os.path.join('primes')))
 from primes import get_large_prime
