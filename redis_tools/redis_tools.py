@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env python
+from time import sleep
 import redis
 
 def init_redis():
@@ -19,4 +20,14 @@ def deleter(key):
 	r = init_redis()
 	while True:
 		key = yield r.delete(key)
+
+def waiter(key):
+	r = init_redis()
+	while True:
+		value = None
+		while value == None:
+			value = r.get(key)
+			if value == None:
+				sleep(1)
+		key = yield value
 
