@@ -9,7 +9,8 @@ def getter(key):
 	while True:
 		key = yield r.get(key)
 
-def setter(key, value):
+def setter(initial):
+	key, value = initial
 	r = init_redis()
 	while True:
 		key, value = yield r.set(key, value)
