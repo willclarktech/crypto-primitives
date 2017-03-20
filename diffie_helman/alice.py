@@ -21,8 +21,9 @@ def main(min_a=2000, max_a=3000, g=2):
 	print("Set A")
 
 	print("Waiting for B...")
-	redis_waiter = waiter("B")
-	B = int(redis_waiter.send(None))
+	redis_waiter = waiter(1)
+	redis_waiter.send(None)
+	B = int(redis_waiter.send("B"))
 	print("Got B")
 	redis_deleter = deleter("B")
 	redis_deleter.send(None)

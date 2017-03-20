@@ -21,13 +21,14 @@ def deleter(key):
 	while True:
 		key = yield r.delete(key)
 
-def waiter(key):
+def waiter(period):
 	r = init_redis()
+	key = yield
 	while True:
 		value = None
 		while value == None:
 			value = r.get(key)
 			if value == None:
-				sleep(1)
+				sleep(period)
 		key = yield value
 

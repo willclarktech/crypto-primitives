@@ -3,17 +3,19 @@ import os, sys
 sys.path.append(os.path.abspath(os.path.join("redis_tools")))
 from redis_tools import waiter
 
+def wait_for_value(key, redis_waiter):
+	value = redis_waiter.send(key)
+	return int(value)
+
 def main():
-	g_waiter = waiter("g")
-	p_waiter = waiter("p")
-	A_waiter = waiter("A")
-	B_waiter = waiter("B")
+	redis_waiter = waiter(1/2)
+	redis_waiter.send(None)
 
 	g, p, A, B = [
-			g_waiter.send(None),
-			p_waiter.send(None),
-			A_waiter.send(None),
-			B_waiter.send(None)
+			wait_for_value("g", redis_waiter),
+			wait_for_value("p", redis_waiter),
+			wait_for_value("A", redis_waiter),
+			wait_for_value("B", redis_waiter)
 	]
 
 	a = 0

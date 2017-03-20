@@ -6,8 +6,9 @@ from random import randint
 
 def main(min_b=2000, max_b=3000):
 	print("Waiting for g...")
-	redis_waiter = waiter("g")
-	g = int(redis_waiter.send(None))
+	redis_waiter = waiter(1)
+	redis_waiter.send(None)
+	g = int(redis_waiter.send("g"))
 	print("Got g")
 	redis_deleter = deleter("g")
 	redis_deleter.send(None)
