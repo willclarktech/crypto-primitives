@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env pypy3
 import sys
 from math import sqrt
 from random import randint
