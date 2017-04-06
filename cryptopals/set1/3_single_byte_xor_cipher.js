@@ -15,7 +15,7 @@ const scoreTexts = text => {
 	return { text, score }
 }
 
-const decipherSingleByteXor = (input, encoding='hex') => {
+const decipherSingleByteXor = (input, encoding='hex', returnScores=false) => {
 	const inputBuffer = Buffer.from(input, encoding)
 	const xored = createSingleByteBuffers(inputBuffer.length)
 		.map(buffer => fixedXor([inputBuffer, buffer], true))
@@ -23,7 +23,10 @@ const decipherSingleByteXor = (input, encoding='hex') => {
 		.map(buffer => buffer.toString('ascii'))
 		.map(scoreTexts)
 	const sortedByScore = scored.sort((a, b) => b.score - a.score)
-	return sortedByScore[0].text
+	const winner = sortedByScore[0]
+	return returnScores
+		? winner
+		: winner.text
 }
 
 module.exports = decipherSingleByteXor
