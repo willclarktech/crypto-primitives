@@ -4,10 +4,11 @@ const fs = require('fs')
 const detectSingleCharacterXor = require('./4_detect_single_character_xor')
 
 const file = fs.readFileSync('./challenge-data/4.txt')
-const input = file.toString().split('\n')
+const lines = file.toString().split('\n')
+const input = lines.map(l => Buffer.from(l, 'hex'))
 const expected = 'Now that the party is jumping\n'
 const output = detectSingleCharacterXor(input)
 
-assert.equal(output, expected)
+assert.strictEqual(output.toString('utf8'), expected)
 console.info('shiny')
 

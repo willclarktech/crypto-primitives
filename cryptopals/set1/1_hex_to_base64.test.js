@@ -6,6 +6,6 @@ const input = '49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f6
 const expected = 'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'
 const output = hexToBase64(input)
 
-assert.equal(output, expected)
+assert.strictEqual(output, expected)
 console.info('shiny')
 

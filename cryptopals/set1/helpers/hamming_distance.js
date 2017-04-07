@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 const fixedXor = require('../2_fixed_xor')
 
-const hammingDistance = ({ encoding='hex' }) => input1 => input2 => {
-	const xor = fixedXor([input1, input2], true, encoding)
+const hammingDistance = input1 => input2 => {
+	const xor = fixedXor([input1, input2])
 	return Array
 		.from(xor)
 		.map(n => n.toString(2))
