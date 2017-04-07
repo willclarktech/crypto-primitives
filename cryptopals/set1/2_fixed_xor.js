@@ -1,9 +1,5 @@
 #!/usr/bin/env node
-
-const maybeConvertStringToBuffer = (stringOrBuffer, encoding) =>
-	Buffer.isBuffer(stringOrBuffer)
-		? stringOrBuffer
-		: Buffer.from(stringOrBuffer, encoding)
+const maybeConvertStringToBuffer = require('./helpers/maybe_convert_string_to_buffer')
 
 const fixedXor = (inputs, returnBuffer=false, encoding='hex') => {
 	const [buffer1, buffer2] = inputs.map(input => maybeConvertStringToBuffer(input, encoding))
