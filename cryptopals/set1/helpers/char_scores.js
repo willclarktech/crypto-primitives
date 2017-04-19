@@ -1,6 +1,14 @@
 // https://en.wikipedia.org/wiki/Letter_frequency#Relative_frequencies_of_letters_in_the_English_language
 module.exports = {
 	' ': 20,
+	'\n': 5,
+	'\'': 5,
+	'.': 5,
+	',': 5,
+	';': 1,
+	'\t': 1,
+	'(': 1,
+	')': 1,
 	E: 12.7,
 	e: 12.7,
 	T: 9.1,
