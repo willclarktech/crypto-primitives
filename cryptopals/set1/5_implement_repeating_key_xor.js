@@ -3,7 +3,7 @@ const fixedXor = require('./2_fixed_xor.js')
 
 const repeatingKeyXor = key => input => {
 	const repeatedKey = new Buffer.alloc(input.length, key)
-	return fixedXor([repeatedKey, input])
+	return fixedXor(repeatedKey)(input)
 }
 
 if (require.main === module) {
@@ -14,4 +14,3 @@ if (require.main === module) {
 }
 
 module.exports = repeatingKeyXor
-

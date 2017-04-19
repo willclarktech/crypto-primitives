@@ -21,7 +21,7 @@ const scoreTexts = (text, i) => {
 
 const decipherSingleByteXor = input => {
 	const xored = createSingleByteBuffers(input.length)
-		.map(buffer => fixedXor([input, buffer], true))
+		.map(buffer => fixedXor(input)(buffer))
 	const scored = xored
 		.map(buffer => buffer.toString('utf8'))
 		.map(scoreTexts)
@@ -31,4 +31,3 @@ const decipherSingleByteXor = input => {
 }
 
 module.exports = decipherSingleByteXor
-
