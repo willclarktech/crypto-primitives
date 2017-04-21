@@ -14,4 +14,4 @@ const testDecryptAes = () => {
 }
 
 testDecryptAes()
-console.info('shiny')
+console.info('7: shiny')

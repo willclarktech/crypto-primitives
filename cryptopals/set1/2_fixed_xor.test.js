@@ -8,4 +8,4 @@ const expected = '746865206b696420646f6e277420706c6179'
 const output = fixedXor(input1)(input2)
 
 assert.strictEqual(output.toString('hex'), expected)
-console.info('shiny')
+console.info('2: shiny')

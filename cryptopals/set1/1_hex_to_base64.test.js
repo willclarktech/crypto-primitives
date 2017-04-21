@@ -7,5 +7,4 @@ const expected = 'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb2
 const output = hexToBase64(input)
 
 assert.strictEqual(output, expected)
-console.info('shiny')
-
+console.info('1: shiny')

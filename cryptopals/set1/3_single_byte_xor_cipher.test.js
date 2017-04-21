@@ -7,5 +7,4 @@ const expected = 'Cooking MC\'s like a pound of bacon'
 const output = decipherSingleByteXor(input).text
 
 assert.strictEqual(output.toString('utf8'), expected)
-console.info('shiny')
-
+console.info('3: shiny')

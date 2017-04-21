@@ -15,4 +15,4 @@ const testDetectAesInEcbMode = () => {
 }
 
 testDetectAesInEcbMode()
-console.info('shiny')
+console.info('8: shiny')

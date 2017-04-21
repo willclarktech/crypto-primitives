@@ -10,5 +10,4 @@ const expected = 'Now that the party is jumping\n'
 const output = detectSingleCharacterXor(input)
 
 assert.strictEqual(output.toString('utf8'), expected)
-console.info('shiny')
-
+console.info('4: shiny')

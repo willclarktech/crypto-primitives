@@ -8,5 +8,4 @@ const expected = '0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a2622
 const output = repeatingKeyXor(key)(input)
 
 assert.strictEqual(output.toString('hex'), expected)
-console.info('shiny')
-
+console.info('5: shiny')
