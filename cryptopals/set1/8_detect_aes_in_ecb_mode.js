@@ -1,12 +1,11 @@
 #!/usr/bin/env node
-// const crypto = require('crypto')
 
-const divideInputIntoBlocks = blockSize => input =>
-  Array(Math.ceil(input.length / blockSize))
+const divide_input_into_blocks = block_size => input =>
+  Array(Math.ceil(input.length / block_size))
     .fill()
-    .map((_, i) => input.slice(i * blockSize, (i + 1) * blockSize))
+    .map((_, i) => input.slice(i * block_size, (i + 1) * block_size))
 
-const detectIfDuplicate = blocks =>
+const detect_if_duplicate = blocks =>
   blocks
     .some((block, i) =>
       blocks
@@ -14,10 +13,10 @@ const detectIfDuplicate = blocks =>
         .some(b => b.equals(block))
     )
 
-const detectAesInEcbMode = inputs =>
+const detect_aes_in_ecb_mode = inputs =>
   inputs
-    .map(divideInputIntoBlocks(16))
-    .map(detectIfDuplicate)
+    .map(divide_input_into_blocks(16))
+    .map(detect_if_duplicate)
     .indexOf(true)
 
-module.exports = detectAesInEcbMode
+module.exports = detect_aes_in_ecb_mode

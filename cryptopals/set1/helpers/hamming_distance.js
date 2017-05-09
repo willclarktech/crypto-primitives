@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-const fixedXor = require('../2_fixed_xor')
+const fixed_xor = require('../2_fixed_xor')
 
-const hammingDistance = input1 => input2 => {
-	const xor = fixedXor([input1, input2])
+const hamming_distance = input_1 => input_2 => {
+	const xor = fixed_xor([input_1, input_2])
 	return Array
 		.from(xor)
 		.map(n => n.toString(2))
@@ -12,5 +12,5 @@ const hammingDistance = input1 => input2 => {
 		}, 0)
 }
 
-module.exports = hammingDistance
+module.exports = hamming_distance
 

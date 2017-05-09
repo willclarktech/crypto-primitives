@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
-const hexToBase64 = hexString => {
-	const buffer = new Buffer.from(hexString, 'hex')
+const hex_to_base64 = hex_string => {
+	const buffer = new Buffer.from(hex_string, 'hex')
 	return buffer.toString('base64')
 }
 
-module.exports = hexToBase64
-
+module.exports = hex_to_base64

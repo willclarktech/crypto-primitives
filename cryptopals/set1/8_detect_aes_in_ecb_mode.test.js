@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 const assert = require('assert')
 const fs = require('fs')
-const detectAesInEcbMode = require('./8_detect_aes_in_ecb_mode')
+const detect_aes_in_ecb_mode = require('./8_detect_aes_in_ecb_mode')
 
-const testDetectAesInEcbMode = () => {
-  const fileString = fs.readFileSync('./challenge-data/8.txt', 'utf8')
-  const inputs = fileString
+const test_detect_aes_in_ecb_mode = () => {
+  const file_string = fs.readFileSync('./challenge-data/8.txt', 'utf8')
+  const inputs = file_string
     .split('\n')
     .filter(Boolean)
     .map(string => Buffer.from(string, 'hex'))
 
-  const output = detectAesInEcbMode(inputs)
+  const output = detect_aes_in_ecb_mode(inputs)
   console.info(inputs[output].toString('hex'))
 }
 
-testDetectAesInEcbMode()
+test_detect_aes_in_ecb_mode()
 console.info('8: shiny')

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 const crypto = require('crypto')
 
-const decryptAes = message => key => {
+const decrypt_aes = message => key => {
   const iv = Buffer.alloc(0)
   const decipher = crypto.createDecipheriv('aes-128-ecb', key, iv)
-  const block1 = decipher.update(message)
-  const block2 = decipher.final()
-  return Buffer.concat([block1, block2])
+  const block_1 = decipher.update(message)
+  const block_2 = decipher.final()
+  return Buffer.concat([block_1, block_2])
 }
 
-module.exports = decryptAes
+module.exports = decrypt_aes

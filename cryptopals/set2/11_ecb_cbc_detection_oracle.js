@@ -1,33 +1,33 @@
 #!/usr/bin/env node
 const crypto = require('crypto')
 
-const createRandomAesKey = () => crypto.randomBytes(16)
-const addRandomBytes = message => {
-	const fiveToTen = () => Math.floor(Math.random() * 6) + 5
-	const before = crypto.randomBytes(fiveToTen())
-	const after = crypto.randomBytes(fiveToTen())
+const create_random_aes_key = () => crypto.randomBytes(16)
+const add_random_bytes = message => {
+	const five_to_ten = () => Math.floor(Math.random() * 6) + 5
+	const before = crypto.randomBytes(five_to_ten())
+	const after = crypto.randomBytes(five_to_ten())
 	return Buffer.concat([before, message, after])
 }
 
 const encryption_oracle = plaintext => reveal => {
-	const key = createRandomAesKey()
-	const padded = addRandomBytes(plaintext)
+	const key = create_random_aes_key()
+	const padded = add_random_bytes(plaintext)
 	const mode = Math.floor(Math.random() * 2)
 		? 'aes-128-cbc'
 		: 'aes-128-ecb'
 	reveal && console.info(mode)
 	const iv = mode === 'aes-128-cbc'
-		? createRandomAesKey()
+		? create_random_aes_key()
 		: Buffer.alloc(0)
 	const cipher = crypto.createCipheriv(mode, key, iv)
 	return Buffer.concat([cipher.update(padded), cipher.final()])
 }
 
-const detectBlockCipherMode = ciphertext => {
-	const blockSize = 16
-	const blocks = new Array(Math.ceil(ciphertext.length / blockSize))
+const detect_block_cipher_mode = ciphertext => {
+	const block_size = 16
+	const blocks = new Array(Math.ceil(ciphertext.length / block_size))
 		.fill()
-		.map((_, i) => ciphertext.slice(i * blockSize, (i + 1) * blockSize))
+		.map((_, i) => ciphertext.slice(i * block_size, (i + 1) * block_size))
 	return blocks
 		.some((block, i) =>
 			blocks
@@ -39,8 +39,8 @@ const detectBlockCipherMode = ciphertext => {
 }
 
 module.exports = {
-	createRandomAesKey,
-	addRandomBytes,
+	create_random_aes_key,
+	add_random_bytes,
 	encryption_oracle,
-	detectBlockCipherMode,
+	detect_block_cipher_mode,
 }
