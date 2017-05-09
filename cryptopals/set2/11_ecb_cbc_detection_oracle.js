@@ -23,8 +23,24 @@ const encryption_oracle = plaintext => reveal => {
 	return Buffer.concat([cipher.update(padded), cipher.final()])
 }
 
+const detectBlockCipherMode = ciphertext => {
+	const blockSize = 16
+	const blocks = new Array(Math.ceil(ciphertext.length / blockSize))
+		.fill()
+		.map((_, i) => ciphertext.slice(i * blockSize, (i + 1) * blockSize))
+	return blocks
+		.some((block, i) =>
+			blocks
+				.slice(i + 1)
+				.some(b => b.equals(block))
+		)
+		? 'aes-128-ecb'
+		: 'aes-128-cbc'
+}
+
 module.exports = {
 	createRandomAesKey,
 	addRandomBytes,
 	encryption_oracle,
+	detectBlockCipherMode,
 }
