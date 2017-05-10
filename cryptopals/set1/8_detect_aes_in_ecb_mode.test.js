@@ -11,7 +11,7 @@ const test_detect_aes_in_ecb_mode = () => {
     .map(string => Buffer.from(string, 'hex'))
 
   const output = detect_aes_in_ecb_mode(inputs)
-  console.info(inputs[output].toString('hex'))
+  console.info('string using ecb mode:', inputs[output].toString('hex'))
 }
 
 test_detect_aes_in_ecb_mode()
