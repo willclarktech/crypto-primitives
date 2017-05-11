@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 const fs = require('fs')
 const crypto = require('crypto')
-const { add_random_bytes } = require('./11_ecb_cbc_detection_oracle')
 
 const encryption_oracle = unknown => known => {
 	const key = Buffer.from(fs.readFileSync('./test-data/key_hex.txt', 'utf8'), 'hex')
-	const padded = add_random_bytes(unknown)
-	const plaintext = Buffer.concat([known, padded])
+	const plaintext = Buffer.concat([known, unknown])
 	const iv = Buffer.alloc(0)
 	const cipher = crypto.createCipher('aes-128-ecb', key, iv)
 	return Buffer.concat([cipher.update(plaintext), cipher.final()])
@@ -35,7 +33,7 @@ const detect_ecb = oracle_function => block_size => {
 	return ciphertext.slice(0, block_size).equals(ciphertext.slice(block_size, 2 * block_size))
 }
 
-const get_first_byte_of_cipher_text = oracle_function => block_size => {
+const get_first_byte = oracle_function => block_size => {
 	const pad = Buffer.alloc(block_size - 1, 'A')
 	const target_block = oracle_function(pad).slice(0, block_size)
 	let i = 0
@@ -51,5 +49,5 @@ module.exports = {
 	encryption_oracle,
 	get_block_size,
 	detect_ecb,
-	get_first_byte_of_cipher_text,
+	get_first_byte,
 }
