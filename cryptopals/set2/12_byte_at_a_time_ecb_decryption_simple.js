@@ -29,17 +29,27 @@ const get_block_size = oracle_function => {
 }
 
 const detect_ecb = oracle_function => block_size => {
-	const block = Buffer.from(new Array(block_size)
-		.fill('A')
-		.join('')
-	)
+	const block = Buffer.alloc(block_size, 'A')
 	const known = Buffer.concat([block, block])
 	const ciphertext = oracle_function(known)
 	return ciphertext.slice(0, block_size).equals(ciphertext.slice(block_size, 2 * block_size))
+}
+
+const get_first_byte_of_cipher_text = oracle_function => block_size => {
+	const pad = Buffer.alloc(block_size - 1, 'A')
+	const target_block = oracle_function(pad).slice(0, block_size)
+	let i = 0
+	while (true) {
+		const known = Buffer.concat([pad, Buffer.alloc(1, i)])
+		const candidate_block = oracle_function(known).slice(0, block_size)
+		if (candidate_block.equals(target_block)) return i
+		++i
+	}
 }
 
 module.exports = {
 	encryption_oracle,
 	get_block_size,
 	detect_ecb,
+	get_first_byte_of_cipher_text,
 }
