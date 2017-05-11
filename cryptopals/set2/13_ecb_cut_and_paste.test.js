@@ -3,6 +3,7 @@ const assert = require('assert')
 const {
 	parse_key_value,
 	create_user,
+  profile_for,
 } = require('./13_ecb_cut_and_paste')
 
 const test_parse_key_value = () => {
@@ -29,7 +30,14 @@ const test_create_user = () => {
 	assert.strictEqual(sneaky_output.role, 'user')
 }
 
+const test_profile_for = () => {
+  const input = 'foo@bar.com'
+  const output = profile_for(input)
+  assert.ok(output.match(/^email=foo@bar.com&uid=[\d]+&role=user$/))
+}
+
 test_parse_key_value()
 test_create_user()
+test_profile_for()
 
 console.info('13: shiny')
