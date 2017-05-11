@@ -28,7 +28,18 @@ const get_block_size = oracle_function => {
 		.result
 }
 
+const detect_ecb = oracle_function => block_size => {
+	const block = Buffer.from(new Array(block_size)
+		.fill('A')
+		.join('')
+	)
+	const known = Buffer.concat([block, block])
+	const ciphertext = oracle_function(known)
+	return ciphertext.slice(0, block_size).equals(ciphertext.slice(block_size, 2 * block_size))
+}
+
 module.exports = {
 	encryption_oracle,
 	get_block_size,
+	detect_ecb,
 }
