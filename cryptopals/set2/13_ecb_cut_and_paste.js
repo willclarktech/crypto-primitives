@@ -10,6 +10,13 @@ const parse_key_value = str =>
 		})
 		, {})
 
+const create_user = email => ({
+	email: email.match(/[^&=]/g).join(''),
+	uid: parseInt(Math.random().toString().slice(2), 10),
+	role: 'user',
+})
+
 module.exports = {
 	parse_key_value,
+	create_user,
 }
