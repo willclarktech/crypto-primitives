@@ -3,10 +3,10 @@ const assert = require('assert')
 const {
 	parse_key_value,
 	create_user,
-  profile_for,
-  profile_for_ecb,
-  decrypt_user,
-        create_admin,
+	profile_for,
+	profile_for_ecb,
+	decrypt_user,
+	create_admin,
 } = require('./13_ecb_cut_and_paste')
 
 const email_input = 'foo@bar.com'
@@ -25,7 +25,7 @@ const test_parse_key_value = () => {
 const test_create_user = () => {
 	const normal_output = create_user(email_input)
 	assert.strictEqual(normal_output.email, email_input)
-	assert.ok(typeof normal_output.uid === 'number')
+	assert.ok(typeof normal_output.uid === 'string')
 	assert.strictEqual(normal_output.role, 'user')
 
 	const sneaky_input = `${email_input}&role=admin`
@@ -55,7 +55,7 @@ const test_decrypt_user = () => {
 const test_create_admin_user = () => {
 	const admin_user = create_admin()
 	const output = decrypt_user(admin_user)
-	console.log(output)
+	assert.ok(output.email)
 	assert.strictEqual(output.role, 'admin')
 }
 
