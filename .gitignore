@@ -2,4 +2,6 @@ __pycache__/
 dump.rdb
 *.swp
 *.pyc
+node_modules/
+
 primes/primes-*.txt
