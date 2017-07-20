@@ -43,10 +43,16 @@ const decrypt_user = ciphertext => {
   return parse_key_value(decrypted.toString())
 }
 
+const create_admin = () => {
+        const profile = profile_for_ecb('admin@email.com')
+        return profile
+}
+
 module.exports = {
 	parse_key_value,
 	create_user,
   profile_for,
   profile_for_ecb,
   decrypt_user,
+        create_admin,
 }

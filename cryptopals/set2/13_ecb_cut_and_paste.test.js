@@ -6,6 +6,7 @@ const {
   profile_for,
   profile_for_ecb,
   decrypt_user,
+        create_admin,
 } = require('./13_ecb_cut_and_paste')
 
 const email_input = 'foo@bar.com'
@@ -47,9 +48,15 @@ const test_profile_for_ecb = () => {
 const test_decrypt_user = () => {
   const encrypted = profile_for_ecb(email_input)
   const output = decrypt_user(encrypted)
-  console.log(output)
   assert.strictEqual(output.email, email_input)
   assert.strictEqual(output.role, 'user')
+}
+
+const test_create_admin_user = () => {
+        const admin_user = create_admin()
+        const output = decrypt_user(admin_user)
+        console.log(output)
+        assert.strictEqual(output.role, 'admin')       
 }
 
 test_parse_key_value()
@@ -57,5 +64,6 @@ test_create_user()
 test_profile_for()
 test_profile_for_ecb()
 test_decrypt_user()
+test_create_admin_user()
 
 console.info('13: shiny')
