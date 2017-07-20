@@ -26,33 +26,33 @@ const create_user = email => ({
 	role: 'user',
 })
 
-const profile_for = email => {
-  const user = create_user(email)
-  return encode_key_value(user)
+const profile_for = (email) => {
+	const user = create_user(email)
+	return encode_key_value(user)
 }
 
-const profile_for_ecb = email => {
-  const profile = Buffer.from(profile_for(email))
-  const cipher = crypto.createCipheriv('aes-128-ecb', key, iv)
-  return Buffer.concat([cipher.update(profile), cipher.final()])
+const profile_for_ecb = (email) => {
+	const profile = Buffer.from(profile_for(email))
+	const cipher = crypto.createCipheriv('aes-128-ecb', key, iv)
+	return Buffer.concat([cipher.update(profile), cipher.final()])
 }
 
-const decrypt_user = ciphertext => {
-  const decipher = crypto.createDecipheriv('aes-128-ecb', key, iv)
-  const decrypted = Buffer.concat([decipher.update(ciphertext), decipher.final()])
-  return parse_key_value(decrypted.toString())
+const decrypt_user = (ciphertext) => {
+	const decipher = crypto.createDecipheriv('aes-128-ecb', key, iv)
+	const decrypted = Buffer.concat([decipher.update(ciphertext), decipher.final()])
+	return parse_key_value(decrypted.toString())
 }
 
 const create_admin = () => {
-        const profile = profile_for_ecb('admin@email.com')
-        return profile
+	const profile = profile_for_ecb('admin@email.com')
+	return profile
 }
 
 module.exports = {
 	parse_key_value,
 	create_user,
-  profile_for,
-  profile_for_ecb,
-  decrypt_user,
-        create_admin,
+	profile_for,
+	profile_for_ecb,
+	decrypt_user,
+	create_admin,
 }

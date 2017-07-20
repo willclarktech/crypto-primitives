@@ -10,7 +10,7 @@ const detect_if_duplicate = blocks =>
     .some((block, i) =>
       blocks
         .slice(i + 1)
-        .some(b => b.equals(block))
+        .some(b => b.equals(block)),
     )
 
 const detect_aes_in_ecb_mode = inputs =>

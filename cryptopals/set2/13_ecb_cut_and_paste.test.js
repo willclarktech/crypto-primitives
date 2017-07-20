@@ -35,28 +35,28 @@ const test_create_user = () => {
 }
 
 const test_profile_for = () => {
-  const output = profile_for(email_input)
-  assert.ok(output.match(/^email=foo@bar.com&uid=[\d]+&role=user$/))
+	const output = profile_for(email_input)
+	assert.ok(output.match(/^email=foo@bar.com&uid=[\d]+&role=user$/))
 }
 
 const test_profile_for_ecb = () => {
-  const plain = Buffer.from(profile_for(email_input))
-  const output = profile_for_ecb(email_input)
-  assert.ok(!output.equals(plain))
+	const plain = Buffer.from(profile_for(email_input))
+	const output = profile_for_ecb(email_input)
+	assert.ok(!output.equals(plain))
 }
 
 const test_decrypt_user = () => {
-  const encrypted = profile_for_ecb(email_input)
-  const output = decrypt_user(encrypted)
-  assert.strictEqual(output.email, email_input)
-  assert.strictEqual(output.role, 'user')
+	const encrypted = profile_for_ecb(email_input)
+	const output = decrypt_user(encrypted)
+	assert.strictEqual(output.email, email_input)
+	assert.strictEqual(output.role, 'user')
 }
 
 const test_create_admin_user = () => {
-        const admin_user = create_admin()
-        const output = decrypt_user(admin_user)
-        console.log(output)
-        assert.strictEqual(output.role, 'admin')       
+	const admin_user = create_admin()
+	const output = decrypt_user(admin_user)
+	console.log(output)
+	assert.strictEqual(output.role, 'admin')
 }
 
 test_parse_key_value()

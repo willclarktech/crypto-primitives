@@ -12,9 +12,7 @@ const get_hamming_distance = input_1 => input_2 =>
 
 const get_normalized_hamming_distance_for_key_size = message =>
   key_size =>
-  get_hamming_distance
-    (message.slice(0, key_size))
-    (message.slice(key_size, key_size * 2))
+  get_hamming_distance(message.slice(0, key_size))(message.slice(key_size, key_size * 2))
     / key_size
 
 const rank_key_sizes_by_hamming_distance = message =>
@@ -23,10 +21,10 @@ const rank_key_sizes_by_hamming_distance = message =>
     .fill()
     .map((_, i) => start_key_size + i)
     .map(key_size => [
-      key_size,
-      get_normalized_hamming_distance_for_key_size(message)(key_size),
-      get_normalized_hamming_distance_for_key_size(message.slice(key_size))(key_size),
-    ])
+	key_size,
+	get_normalized_hamming_distance_for_key_size(message)(key_size),
+	get_normalized_hamming_distance_for_key_size(message.slice(key_size))(key_size),
+])
     .map(([l, score_1, score_2]) => [l, (score_1 + score_2) / 2])
     .sort((a, b) => a[1] - b[1])
     .map(tuple => tuple[0])
@@ -34,13 +32,13 @@ const rank_key_sizes_by_hamming_distance = message =>
 const divide_text_by_key_size = message => key_size =>
   message
     .reduce((a, next, i) => {
-      const index = i % key_size
-      const buffer_to_merge = Buffer.alloc(1, next)
-      a[index] = a[index]
+	const index = i % key_size
+	const buffer_to_merge = Buffer.alloc(1, next)
+	a[index] = a[index]
         ? Buffer.concat([a[index], buffer_to_merge])
         : buffer_to_merge
-      return a
-    }, [])
+	return a
+}, [])
 
 const break_array_of_single_xor = xored_messages =>
   xored_messages
@@ -63,14 +61,14 @@ const break_repeating_key_xor = message => key_size_range =>
     .map(fn => fn(message))
     .map(score_text)
     .sort((a, b) => b.score - a.score)
-    .map(({text}) => text)
+    .map(({ text }) => text)
 
 module.exports = {
-  get_hamming_distance,
-  get_normalized_hamming_distance_for_key_size,
-  rank_key_sizes_by_hamming_distance,
-  divide_text_by_key_size,
-  break_array_of_single_xor,
-  get_key_for_repeating_key_xor,
-  break_repeating_key_xor,
+	get_hamming_distance,
+	get_normalized_hamming_distance_for_key_size,
+	rank_key_sizes_by_hamming_distance,
+	divide_text_by_key_size,
+	break_array_of_single_xor,
+	get_key_for_repeating_key_xor,
+	break_repeating_key_xor,
 }
