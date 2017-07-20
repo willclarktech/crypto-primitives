@@ -35,18 +35,18 @@ const create_user = email => ({
 	role: 'user',
 })
 
-const profile_for = (email) => {
+const profile_for = email => {
 	const user = create_user(email)
 	return encode_key_value(user)
 }
 
-const profile_for_ecb = (email) => {
+const profile_for_ecb = email => {
 	const profile = Buffer.from(profile_for(email))
 	const cipher = crypto.createCipheriv('aes-128-ecb', key, iv)
 	return Buffer.concat([cipher.update(profile), cipher.final()])
 }
 
-const decrypt_user = (ciphertext) => {
+const decrypt_user = ciphertext => {
 	const decipher = crypto.createDecipheriv('aes-128-ecb', key, iv)
 	decipher.setAutoPadding(false)
 	const decrypted = Buffer.concat([decipher.update(ciphertext), decipher.final()])

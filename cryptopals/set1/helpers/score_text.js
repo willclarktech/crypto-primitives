@@ -1,6 +1,6 @@
 const char_scores = require('./char_scores')
 
-const score_text = (text) => {
+const score_text = text => {
 	const score = Array.from(text.toString())
     .reduce((current_score, next_char) =>
       current_score + (char_scores[next_char] || -1000)

@@ -2,14 +2,14 @@
 const crypto = require('crypto')
 
 const create_random_aes_key = () => crypto.randomBytes(16)
-const add_random_bytes = (message) => {
+const add_random_bytes = message => {
 	const five_to_ten = () => Math.floor(Math.random() * 6) + 5
 	const before = crypto.randomBytes(five_to_ten())
 	const after = crypto.randomBytes(five_to_ten())
 	return Buffer.concat([before, message, after])
 }
 
-const encryption_oracle = plaintext => (reveal) => {
+const encryption_oracle = plaintext => reveal => {
 	const key = create_random_aes_key()
 	const padded = add_random_bytes(plaintext)
 	const mode = Math.floor(Math.random() * 2)
@@ -25,7 +25,7 @@ const encryption_oracle = plaintext => (reveal) => {
 	return Buffer.concat([cipher.update(padded), cipher.final()])
 }
 
-const detect_block_cipher_mode = (ciphertext) => {
+const detect_block_cipher_mode = ciphertext => {
 	const block_size = 16
 	const blocks = new Array(Math.ceil(ciphertext.length / block_size))
 		.fill()

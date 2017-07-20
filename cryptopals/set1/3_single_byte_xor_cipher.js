@@ -7,7 +7,7 @@ const create_single_byte_buffers = (len, byte_size = 8) =>
 		.fill(null)
 		.map((_, i) => Buffer.alloc(len, i))
 
-const decipher_single_byte_xor = (input) => {
+const decipher_single_byte_xor = input => {
 	const xored = create_single_byte_buffers(input.length)
 		.map(buffer => fixed_xor(input)(buffer))
 	const scored = xored

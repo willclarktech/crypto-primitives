@@ -7,7 +7,7 @@ const xor = require('../set1/2_fixed_xor')
 const block_size = 16
 const split_blocks = size => message => (_, i) =>
 	message.slice(i * size, (i + 1) * size)
-const trim_block = (block) => {
+const trim_block = block => {
 	const l = block.length
 	const pad_char = block[l - 1]
 	const padded = block
@@ -26,7 +26,7 @@ const chain_blocks = iv => cipher => (ciphered_blocks, block, i) => {
 	return [...ciphered_blocks, cipher.update(xored)]
 }
 
-const decrypt_cbc_mode = key => iv => (message) => {
+const decrypt_cbc_mode = key => iv => message => {
 	const decipher = crypto.createDecipheriv('aes-128-ecb', key, '')
 	assert.strictEqual(message.length % block_size, 0, 'Message is irregular length')
 
@@ -49,7 +49,7 @@ const decrypt_cbc_mode = key => iv => (message) => {
 	return trim_block(joined)
 }
 
-const encrypt_cbc_mode = key => iv => (message) => {
+const encrypt_cbc_mode = key => iv => message => {
 	const cipher = crypto.createCipher('aes-128-ecb', key)
 	const num_blocks = Math.ceil(message.length / block_size)
 	const blocks = new Array(num_blocks)

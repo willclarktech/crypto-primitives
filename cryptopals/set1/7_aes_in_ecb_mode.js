@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const crypto = require('crypto')
 
-const decrypt_aes = message => (key) => {
+const decrypt_aes = message => key => {
 	const iv = Buffer.alloc(0)
 	const decipher = crypto.createDecipheriv('aes-128-ecb', key, iv)
 	const block_1 = decipher.update(message)

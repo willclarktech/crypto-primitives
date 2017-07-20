@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fixed_xor = require('../2_fixed_xor')
 
-const hamming_distance = input_1 => (input_2) => {
+const hamming_distance = input_1 => input_2 => {
 	const xor = fixed_xor([input_1, input_2])
 	return Array
 		.from(xor)

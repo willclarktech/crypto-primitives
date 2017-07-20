@@ -2,7 +2,7 @@
 const fs = require('fs')
 const crypto = require('crypto')
 
-const encryption_oracle = unknown => (known) => {
+const encryption_oracle = unknown => known => {
 	const key = Buffer.from(fs.readFileSync('./test-data/key_hex.txt', 'utf8'), 'hex')
 	const plaintext = Buffer.concat([known, unknown])
 	const iv = Buffer.alloc(0)
@@ -10,7 +10,7 @@ const encryption_oracle = unknown => (known) => {
 	return Buffer.concat([cipher.update(plaintext), cipher.final()])
 }
 
-const get_block_size = (oracle_function) => {
+const get_block_size = oracle_function => {
 	const max_block_size = 24
 	return new Array(max_block_size)
 		.fill()
@@ -26,14 +26,14 @@ const get_block_size = (oracle_function) => {
 		.result
 }
 
-const detect_ecb = oracle_function => (block_size) => {
+const detect_ecb = oracle_function => block_size => {
 	const block = Buffer.alloc(block_size, 'A')
 	const known = Buffer.concat([block, block])
 	const ciphertext = oracle_function(known)
 	return ciphertext.slice(0, block_size).equals(ciphertext.slice(block_size, 2 * block_size))
 }
 
-const get_first_byte = oracle_function => (block_size) => {
+const get_first_byte = oracle_function => block_size => {
 	const pad = Buffer.alloc(block_size - 1, 'A')
 	const target_block = oracle_function(pad).slice(0, block_size)
 	let i = 0
@@ -46,7 +46,7 @@ const get_first_byte = oracle_function => (block_size) => {
 	return null
 }
 
-const get_nth_byte = oracle_function => block_size => (preceding_bytes) => {
+const get_nth_byte = oracle_function => block_size => preceding_bytes => {
 	const pad = Buffer.alloc(block_size - (preceding_bytes.length % block_size) - 1, 'A')
 	const block_index = Math.floor(preceding_bytes.length / block_size)
 	const target_block = oracle_function(pad)
@@ -64,7 +64,7 @@ const get_nth_byte = oracle_function => block_size => (preceding_bytes) => {
 	return null
 }
 
-const decrypt_ecb = oracle_function => (block_size) => {
+const decrypt_ecb = oracle_function => block_size => {
 	const l = oracle_function(Buffer.alloc(0)).length
 	return Buffer.from(new Array(l)
 		.fill()
