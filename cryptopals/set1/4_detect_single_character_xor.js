@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 const decipher_single_byte_xor = require('./3_single_byte_xor_cipher')
-const char_scores = require('./helpers/char_scores')
 
 const detect_single_character_xor = (input) => {
 	const highest_scoring_texts = input.map(decipher_single_byte_xor)

@@ -15,7 +15,9 @@ const encryption_oracle = plaintext => (reveal) => {
 	const mode = Math.floor(Math.random() * 2)
 		? 'aes-128-cbc'
 		: 'aes-128-ecb'
-	reveal && console.info(mode)
+	if (reveal) {
+		console.info(mode)
+	}
 	const iv = mode === 'aes-128-cbc'
 		? create_random_aes_key()
 		: Buffer.alloc(0)

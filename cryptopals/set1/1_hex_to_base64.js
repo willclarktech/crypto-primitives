@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const hex_to_base64 = (hex_string) => {
-	const buffer = new Buffer.from(hex_string, 'hex')
+	const buffer = Buffer.from(hex_string, 'hex')
 	return buffer.toString('base64')
 }
 

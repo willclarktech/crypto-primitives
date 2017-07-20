@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-const fs = require('fs')
 const assert = require('assert')
 const {
 	encryption_oracle,

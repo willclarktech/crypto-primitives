@@ -17,7 +17,7 @@ const get_normalized_hamming_distance_for_key_size = message =>
 
 const rank_key_sizes_by_hamming_distance = message =>
   ([start_key_size, end_key_size]) =>
-  Array(1 + end_key_size - start_key_size)
+  Array((1 + end_key_size) - start_key_size)
     .fill()
     .map((_, i) => start_key_size + i)
     .map(key_size => [
@@ -34,10 +34,11 @@ const divide_text_by_key_size = message => key_size =>
     .reduce((a, next, i) => {
 	const index = i % key_size
 	const buffer_to_merge = Buffer.alloc(1, next)
-	a[index] = a[index]
+	const o = Buffer.alloc(0)
+	o[index] = a[index]
         ? Buffer.concat([a[index], buffer_to_merge])
         : buffer_to_merge
-	return a
+	return o
 }, [])
 
 const break_array_of_single_xor = xored_messages =>

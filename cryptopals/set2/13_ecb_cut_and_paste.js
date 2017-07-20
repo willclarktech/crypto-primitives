@@ -64,13 +64,6 @@ const get_longer = (shorter, i = 2) => {
 		: get_longer(shorter, i + 1)
 }
 
-const chunk = (block_length, arr) => {
-	const last_item = arr[arr.length - 1]
-	return last_item.length > block_length
-		? chunk(block_length, [...arr.slice(0, arr.length - 1), last_item.slice(0, block_length), last_item.slice(block_length)])
-		: arr
-}
-
 const create_admin = () => {
 	const shorter = profile_for_ecb('A').length
 	const longer = get_longer(shorter)
@@ -78,15 +71,15 @@ const create_admin = () => {
 	const email_length = longer.email_length
 
 	const admin_text = 'admin'
-	const admin_email = Array(email_length).fill('A').join('')
-																+ admin_text
+	const admin_email = Array(email_length).fill('A').join('') + admin_text
+
 	const admin_profile = profile_for_ecb(admin_email)
-	const admin_slice = admin_profile.slice(16, 32)
+	const admin_slice = admin_profile.slice(block_length, block_length * 2)
 
 	const user_text = 'user'
 	const role_email = Array(email_length + user_text.length).fill('A').join('')
 	const role_profile = profile_for_ecb(role_email)
-	const role_slice = role_profile.slice(0, 48)
+	const role_slice = role_profile.slice(0, block_length * 3)
 	return Buffer.concat([role_slice, admin_slice])
 }
 

@@ -18,7 +18,7 @@ const encryption_oracle_result = encryption_oracle(message)(true)
 assert.strictEqual(encryption_oracle_result.equals(message), false)
 
 const detect_block_cipher_modeResult = detect_block_cipher_mode(encryption_oracle_result)
-console.log(detect_block_cipher_modeResult, '<== this should match the result above')
+console.info(detect_block_cipher_modeResult, '<== this should match the result above')
 assert.ok(['aes-128-ecb', 'aes-128-cbc'].includes(detect_block_cipher_modeResult))
 
 console.info('11: shiny')

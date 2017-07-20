@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-const assert = require('assert')
 const fs = require('fs')
 const detect_aes_in_ecb_mode = require('./8_detect_aes_in_ecb_mode')
 

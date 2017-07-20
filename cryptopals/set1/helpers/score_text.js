@@ -6,7 +6,7 @@ const score_text = (text) => {
       current_score + (char_scores[next_char] || -1000)
     , 0)
 	return {
-		text: new Buffer.from(text, 'utf8'),
+		text: Buffer.from(text, 'utf8'),
 		score,
 	}
 }

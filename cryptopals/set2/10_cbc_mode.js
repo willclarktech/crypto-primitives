@@ -20,8 +20,8 @@ const trim_block = (block) => {
 
 const chain_blocks = iv => cipher => (ciphered_blocks, block, i) => {
 	const pad = i
-        	? ciphered_blocks[ciphered_blocks.length - 1]
-        	: iv
+		? ciphered_blocks[ciphered_blocks.length - 1]
+		: iv
 	const xored = xor(block)(pad)
 	return [...ciphered_blocks, cipher.update(xored)]
 }

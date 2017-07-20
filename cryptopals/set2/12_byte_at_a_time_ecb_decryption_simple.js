@@ -41,7 +41,7 @@ const get_first_byte = oracle_function => (block_size) => {
 		const known = Buffer.concat([pad, Buffer.alloc(1, i)])
 		const candidate_block = oracle_function(known).slice(0, block_size)
 		if (candidate_block.equals(target_block)) return i
-		++i
+		++i // eslint-disable-line no-plusplus
 	}
 	return null
 }
@@ -59,7 +59,7 @@ const get_nth_byte = oracle_function => block_size => (preceding_bytes) => {
 		const candidate_block = oracle_function(known)
 			.slice(block_index * block_size, (block_index + 1) * block_size)
 		if (candidate_block.equals(target_block)) return i
-		++i
+		++i // eslint-disable-line no-plusplus
 	}
 	return null
 }
@@ -69,7 +69,7 @@ const decrypt_ecb = oracle_function => (block_size) => {
 	return Buffer.from(new Array(l)
 		.fill()
 		.map((_, i) => i)
-		.reduce((accumulator, i) =>
+		.reduce(accumulator =>
 			[...accumulator, get_nth_byte(oracle_function)(block_size)(accumulator)]
 			, [])
 		.filter(b => b !== null),
