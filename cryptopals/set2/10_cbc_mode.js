@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const assert = require('assert')
 const crypto = require('crypto')
 const pkcs_7_pad = require('./9_pkcs_7_pad')

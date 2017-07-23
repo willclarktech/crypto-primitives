@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const fixed_xor = require('./2_fixed_xor.js')
 
 const repeating_key_xor = key => input => {

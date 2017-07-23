@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const decipher_single_byte_xor = require('./3_single_byte_xor_cipher')
 
 const detect_single_character_xor = input => {

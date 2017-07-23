@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const crypto = require('crypto')
 
 const create_random_aes_key = () => crypto.randomBytes(16)

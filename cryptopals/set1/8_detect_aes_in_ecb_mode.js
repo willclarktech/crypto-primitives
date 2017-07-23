@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const divide_input_into_blocks = block_size => input =>
   Array(Math.ceil(input.length / block_size))
     .fill()

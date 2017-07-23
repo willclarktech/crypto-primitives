@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const score_text = require('./helpers/score_text')
 const fixed_xor = require('./2_fixed_xor')
 const decipher_single_byte_xor = require('./3_single_byte_xor_cipher')

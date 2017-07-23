@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const crypto = require('crypto')
 const fs = require('fs')
 
