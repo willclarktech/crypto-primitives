@@ -49,7 +49,7 @@ const decrypt_cbc_mode = key => iv => message => {
 }
 
 const encrypt_cbc_mode = key => iv => message => {
-	const cipher = crypto.createCipher('aes-128-ecb', key)
+	const cipher = crypto.createCipheriv('aes-128-ecb', key, '')
 	const num_blocks = Math.ceil(message.length / block_size)
 	const blocks = new Array(num_blocks)
 		.fill()
@@ -59,7 +59,7 @@ const encrypt_cbc_mode = key => iv => message => {
 			: block),
 		)
 		.reduce(chain_blocks(iv)(cipher), [])
-	return Buffer.concat([...blocks, cipher.final()])
+	return Buffer.concat(blocks)
 }
 
 module.exports = {
