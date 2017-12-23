@@ -5,7 +5,8 @@ const {
 } = require('./10_cbc_mode')
 const { create_random_aes_key } = require('./11_ecb_cbc_detection_oracle')
 
-const block_length = 16
+const byte_space = 2 ** 8
+const nil = '\x00'
 const key = create_random_aes_key()
 const iv = create_random_aes_key()
 
@@ -34,8 +35,31 @@ const find_admin = encrypted => {
 	return parsed.admin === 'true'
 }
 
+const create_admin = () => {
+	const preIndex = 16;
+	const midIndex = 22;
+	const postIndex = 27;
+
+	const message = `${nil}admin${nil}true${nil}`
+	let cipher = encrypt_cbc_with_padding(message)
+
+	for (let i = 0; i < byte_space; ++i) {
+		for (let j = 0; j < byte_space; ++j) {
+			for (let k = 0; k < byte_space; ++k) {
+				if (find_admin(cipher)) {
+					return cipher
+				}
+				cipher[preIndex] += 1
+			}
+			cipher[midIndex] += 1
+		}
+		cipher[postIndex] += 1
+	}
+}
+
 module.exports = {
 	encrypt_cbc_with_padding,
 	find_admin,
+	create_admin,
 }
 
