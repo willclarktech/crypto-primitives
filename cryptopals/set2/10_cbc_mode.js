@@ -25,7 +25,7 @@ const chain_blocks = iv => cipher => (ciphered_blocks, block, i) => {
 	return [...ciphered_blocks, cipher.update(xored)]
 }
 
-const decrypt_cbc_mode = key => iv => message => {
+const decrypt_cbc_mode_raw = key => iv => message => {
 	const decipher = crypto.createDecipheriv('aes-128-ecb', key, '')
 	assert.strictEqual(message.length % block_size, 0, 'Message is irregular length')
 
@@ -44,8 +44,12 @@ const decrypt_cbc_mode = key => iv => message => {
 			? xor(block)(ciphers[i - 1])
 			: xor(block)(iv)),
 		)
-	const joined = Buffer.concat(xored)
-	return trim_block(joined)
+	return Buffer.concat(xored)
+}
+
+const decrypt_cbc_mode = key => iv => message => {
+	const raw_decrypt = decrypt_cbc_mode_raw(key)(iv)(message)
+	return trim_block(raw_decrypt)
 }
 
 const encrypt_cbc_mode = key => iv => message => {
@@ -64,5 +68,6 @@ const encrypt_cbc_mode = key => iv => message => {
 
 module.exports = {
 	decrypt_cbc_mode,
+	decrypt_cbc_mode_raw,
 	encrypt_cbc_mode,
 }
